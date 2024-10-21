@@ -1,0 +1,39 @@
+name: Build Tauri Application
+
+on:
+  push:
+    branches:
+      - master  # You can change this to any branch you want to monitor
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can also use windows-latest or macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Adjust this to your project's required Node.js version
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build application
+        run: pnpm run tauri build
+
+      - name: Get executable file
+        run: |
+          mkdir -p output
+          cp -r src-tauri/target/* output/
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v3  # Updated to v3
+        with:
+          name: tauri-executable
+          path: output/
