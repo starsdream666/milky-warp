@@ -2,12 +2,12 @@ name: Build Tauri Application
 
 on:
   push:
-    branches:  # Make sure this line remains in English
-      - main  # You can change this to any branch you want to monitor
+    branches:
+      - master  # You can change this to any branch you want to monitor
 
 jobs:
   build:
-    runs-on: windows-latest  # You can also use windows-latest or macos-latest
+    runs-on: ubuntu-latest  # You can also use windows-latest or macos-latest
 
     steps:
       - name: Checkout repository
@@ -33,7 +33,7 @@ jobs:
           cp -r src-tauri/target/* output/
 
       - name: Upload executable
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated to v3
         with:
           name: tauri-executable
           path: output/
