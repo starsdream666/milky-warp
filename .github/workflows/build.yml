@@ -74,3 +74,25 @@ jobs:
           name: tauri-executable
           path: output/
           retention-days: 5  # Keep artifacts for 5 days to save storage
+
+      - name: Generate download URL
+        run: |
+          echo "构建完成！"
+          echo "您可以在 Actions 页面找到构建产物，或通过以下步骤下载："
+          echo "1. 点击上方的 'Summary' 链接"
+          echo "2. 在页面底部的 'Artifacts' 部分找到 'tauri-executable'"
+          echo "3. 点击 'tauri-executable' 即可下载"
+          echo "注意：构建产物将在 5 天后自动删除"
+
+  download:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tauri-executable
+          path: downloaded-artifact
+
+      - name: Display structure of downloaded files
+        run: ls -R downloaded-artifact
