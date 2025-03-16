@@ -30,7 +30,6 @@ jobs:
           sudo apt-get install -y \
             libgtk-3-dev \
             libwebkit2gtk-4.1-dev \
-            libappindicator3-dev \
             librsvg2-dev \
             patchelf \
             build-essential \
@@ -38,7 +37,9 @@ jobs:
             wget \
             libssl-dev \
             libayatana-appindicator3-dev \
-            software-properties-common
+            software-properties-common \
+            libasound2-dev \
+            libudev-dev
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
