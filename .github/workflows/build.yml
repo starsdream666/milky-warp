@@ -69,7 +69,7 @@ jobs:
           cp -r src-tauri/target/release/bundle/* output/
 
       - name: Upload executable
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.0
         id: upload-artifact
         with:
           name: tauri-executable
