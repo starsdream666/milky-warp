@@ -39,7 +39,9 @@ jobs:
             libayatana-appindicator3-dev \
             software-properties-common \
             libasound2-dev \
-            libudev-dev
+            libudev-dev \
+            libsoup2.4-dev \
+            pkg-config
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -72,6 +74,15 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           pnpm add -g @tauri-apps/cli
+
+      - name: Debug config file
+        run: |
+          echo "Config file content:"
+          cat src/config.ts
+          echo "File encoding:"
+          file src/config.ts
+          echo "Hex dump of file:"
+          xxd src/config.ts
 
       - name: Build application
         run: pnpm run tauri build
