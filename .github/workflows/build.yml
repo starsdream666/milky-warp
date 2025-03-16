@@ -48,12 +48,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '16'  # Adjust this to your project's required Node.js version
-          cache: 'pnpm'  # Enable pnpm caching
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: latest
+          version: 8
           run_install: false
 
       - name: Get pnpm store directory
@@ -70,7 +69,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm add -g @tauri-apps/cli
 
       - name: Build application
         run: pnpm run tauri build
